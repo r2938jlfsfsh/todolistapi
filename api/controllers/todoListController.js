@@ -33,7 +33,6 @@ exports.read_a_task = function(req, res) {
 
 exports.read_a_task_by_name = function(req, res) {
     console.log('in read_a_task_by_name');
-    console.log('req.query: ' + req.body);
     Task.find({name: req.params.name}, function(err, task) {
         if (err)
             res.send(err);
