@@ -21,4 +21,8 @@ var TaskSchema = new Schema({
     }
 });
 
+TaskSchema.virtual('uri').get(function () {
+    return "http://localhost:3000/tasks/" + this._id;
+});
+
 module.exports = mongoose.model('Tasks', TaskSchema);

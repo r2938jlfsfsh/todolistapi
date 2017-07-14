@@ -8,7 +8,14 @@ exports.list_all_tasks = function(req, res) {
     Task.find({}, function(err, task) {
         if (err)
             res.send(err);
-        res.json(task);
+
+        var newList = [];
+        var newObj;
+        for(var i = 0; i < task.length; i++) {
+            newObj = task[i].toObject({ virtuals: true });
+            newList.push(newObj);
+        }
+        res.json(newList);
     });
 };
 
@@ -17,7 +24,8 @@ exports.create_a_task = function(req, res) {
     new_task.save(function(err, task) {
         if (err)
             res.send(err);
-        res.json(task);
+        console.log(task);
+        res.json(task.toObject({ virtuals: true }));
     });
 };
 
@@ -26,7 +34,7 @@ exports.read_a_task = function(req, res) {
     Task.findById(req.params.taskId, function(err, task) {
         if (err)
             res.send(err);
-        res.json(task);
+        res.json(task.toObject({ virtuals: true }));
     });
 };
 
@@ -36,7 +44,13 @@ exports.read_a_task_by_name = function(req, res) {
     Task.find({name: req.params.name}, function(err, task) {
         if (err)
             res.send(err);
-        res.json(task);
+        var newList = [];
+        var newObj;
+        for(var i = 0; i < task.length; i++) {
+            newObj = task[i].toObject({ virtuals: true });
+            newList.push(newObj);
+        }
+        res.json(newList);
     });
 };
 
@@ -45,7 +59,7 @@ exports.update_a_task = function(req, res) {
     Task.findOneAndUpdate({_id: req.params.taskId}, req.body, {new: true}, function(err, task) {
         if (err)
             res.send(err);
-        res.json(task);
+        res.json(task.toObject({ virtuals: true }));
     });
 };
 
