@@ -7,12 +7,13 @@ var express = require('express'),
 
 mongoose.Promise = global.Promise;
 var dbConnString = process.env.MONGO_CONN;
+var corsAllowString = process.env.CORS_ALLOW;
 mongoose.connect(dbConnString);
 
 var cors = require('cors');
 
-// pu this before all route definitions
-app.use(cors({origin: 'http://localhost:63342'}));
+// put this before all route definitions
+app.use(cors({origin: corsAllowString}));
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
