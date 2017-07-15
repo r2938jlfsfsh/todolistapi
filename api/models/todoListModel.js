@@ -1,7 +1,8 @@
 'use strict';
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
-
+var hostName = process.env.APP_MY_IP;
+var port = process.env.PORT || 3000;
 
 var TaskSchema = new Schema({
     name: {
@@ -20,7 +21,8 @@ var TaskSchema = new Schema({
 });
 
 TaskSchema.virtual('uri').get(function () {
-    return "http://localhost:3000/tasks/" + this._id;
+    //return "http://localhost:3000/tasks/" + this._id;
+    return hostName + ":" + port + "/tasks/" + this._id;
 });
 
 module.exports = mongoose.model('Tasks', TaskSchema);
