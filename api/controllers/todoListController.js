@@ -26,7 +26,7 @@ exports.create_a_task = function(req, res) {
     new_task.save(function(err, task) {
         if (err)
             res.send(err);
-        console.log(task);
+        //console.log(task);
         res.json(task.toObject({ virtuals: true }));
     });
 };

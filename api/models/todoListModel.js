@@ -21,7 +21,6 @@ var TaskSchema = new Schema({
 });
 
 TaskSchema.virtual('uri').get(function () {
-    //return "http://localhost:3000/tasks/" + this._id;
     return "http://" + hostName + ":" + port + "/tasks/" + this._id;
 });
 
