@@ -6,8 +6,12 @@ var express = require('express'),
     bodyParser = require('body-parser');
 
 mongoose.Promise = global.Promise;
-mongoose.connect('mongodb://localhost:27017/Tododb');
+mongoose.connect('mongodb://u2:p2@localhost:27017/Tododb');
 
+var cors = require('cors');
+
+// use it before all route definitions
+app.use(cors({origin: 'http://localhost:63342'}));
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
